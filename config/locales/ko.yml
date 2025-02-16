@@ -1,0 +1,33 @@
+ko:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "유효성 검사에 실패했습니다: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "%{record}가 존재하기 때문에 삭제할 수 없습니다"
+          has_many: "%{record}가 존재하기 때문에 삭제할 수 없습니다"
+      models:
+        comment:
+          attributes:
+            content:
+              blank: "내용을 입력해주세요"
+              too_short: "내용이 너무 짧습니다 (최소 %{count}자 이상)"
+              too_long: "내용이 너무 깁니다 (최대 %{count}자)"
+            phone_number:
+              blank: "전화번호는 필수입니다"
+            user:
+              blank: "사용자 정보가 필요합니다"
+        vote:
+          attributes:
+            vote_type:
+              blank: "투표 유형을 선택해주세요"
+              inclusion: "올바른 투표 유형을 선택해주세요"
+            user_id:
+              taken: "이미 투표하셨습니다"
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      not_saved: "저장하지 못했습니다"
+      blank: "필수 입력 항목입니다"
+      too_short: "너무 짧습니다 (최소 %{count}자 이상)"
+      too_long: "너무 깁니다 (최대 %{count}자)"

@@ -11,6 +11,11 @@ module Checkwhos
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
 
+    # 기본 로케일을 한국어로 설정
+    config.i18n.default_locale = :ko
+    config.i18n.available_locales = [ :ko, :en ]
+    config.i18n.fallbacks = [ :ko, :en ]
+
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.

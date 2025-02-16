@@ -1,0 +1,100 @@
+<div class="min-h-screen py-6">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-6">
+      <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="p-4">
+          <%= form_tag search_path(number: ""), method: :get, class: "w-full", id: "search-form" do %>
+            <div class="relative">
+              <input class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                     type="tel" 
+                     placeholder="전화번호를 입력하세요 (예: 01012345678)" 
+                     pattern="[0-9]{10,11}"
+                     required
+                     id="phone-number-input">
+              <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-200" 
+                      type="submit">
+                검색
+              </button>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+      <div class="px-4 py-5 sm:p-6">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-2xl font-bold text-gray-900"><%= @phone_number.formatted_number %></h2>
+          <%= link_to root_path, class: "text-blue-500 hover:text-blue-700" do %>
+            다른 번호 검색하기
+          <% end %>
+        </div>
+
+        <% if user_signed_in? %>
+          <%= form_for @comment, url: phone_number_comments_path(phone_number_number: @phone_number.number), html: { class: "mb-6" } do |f| %>
+            <div class="mt-1">
+              <%= f.text_area :content, 
+                rows: 3, 
+                class: "shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md", 
+                placeholder: "이 번호에 대한 코멘트를 남겨주세요" %>
+            </div>
+            <%= f.submit "코멘트 남기기", 
+              class: "mt-3 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+          <% end %>
+        <% else %>
+          <div class="bg-gray-50 p-4 rounded-lg mb-6 text-center">
+            <%= link_to "로그인하고 코멘트 남기기", new_user_session_path, class: "text-blue-500 hover:text-blue-700" %>
+          </div>
+        <% end %>
+
+        <div class="space-y-4">
+          <% @comments.each do |comment| %>
+            <div class="bg-gray-50 p-4 rounded-lg">
+              <div class="flex justify-between items-start">
+                <div class="flex-grow">
+                  <p class="text-sm text-gray-900"><%= comment.content %></p>
+                  <p class="mt-1 text-xs text-gray-500">
+                    <%= comment.user.email %> • <%= time_ago_in_words(comment.created_at) %> 전
+                  </p>
+                </div>
+                
+                <% if user_signed_in? %>
+                  <div class="flex space-x-2">
+                    <%= button_to like_comment_path(id: comment.id), 
+                      method: :post,
+                      class: "flex items-center text-sm #{comment.vote_type_by(current_user) == 'like' ? 'text-blue-500' : 'text-gray-500 hover:text-blue-500'}" do %>
+                      <span class="mr-1">👍</span>
+                      <span><%= comment.likes_count %></span>
+                    <% end %>
+
+                    <%= button_to dislike_comment_path(id: comment.id),
+                      method: :post,
+                      class: "flex items-center text-sm #{comment.vote_type_by(current_user) == 'dislike' ? 'text-red-500' : 'text-gray-500 hover:text-red-500'}" do %>
+                      <span class="mr-1">👎</span>
+                      <span><%= comment.dislikes_count %></span>
+                    <% end %>
+
+                    <%# 삭제 기능 임시 비활성화
+                    # if comment.user == current_user
+                    #   button_to comment_path(id: comment.id),
+                    #     method: :delete,
+                    #     class: "flex items-center text-sm text-gray-500 hover:text-red-500",
+                    #     data: { confirm: "정말로 이 댓글을 삭제하시겠습니까?" } do
+                    #     <span>🗑️</span>
+                    #   end
+                    # end
+                    %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+          
+          <div class="mt-6">
+            <%= paginate @comments %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
