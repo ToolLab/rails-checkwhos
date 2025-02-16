@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # Sitemap
+  get "sitemap.xml", to: "sitemaps#show", defaults: { format: "xml" }
+
   devise_for :users
 
   # 한국어 사이트 라우팅 (/kr)
