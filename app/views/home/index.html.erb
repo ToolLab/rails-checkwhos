@@ -64,6 +64,9 @@
                             <p class="text-sm text-gray-500 truncate">
                               <%= comment.content %>
                             </p>
+                            <p class="text-xs text-gray-400">
+                              <%= comment.user.masked_email %>
+                            </p>
                           </div>
                           <div class="ml-2 flex-shrink-0 flex">
                             <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">

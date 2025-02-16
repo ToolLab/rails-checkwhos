@@ -54,7 +54,7 @@
                 <div class="flex-grow">
                   <p class="text-sm text-gray-900"><%= comment.content %></p>
                   <p class="mt-1 text-xs text-gray-500">
-                    <%= comment.user.email %> • <%= time_ago_in_words(comment.created_at) %> 전
+                    <%= comment.user.masked_email %> • <%= time_ago_in_words(comment.created_at) %> 전
                   </p>
                 </div>
                 
