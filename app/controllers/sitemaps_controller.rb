@@ -6,9 +6,9 @@ class SitemapsController < ApplicationController
 
   skip_before_action :verify_authenticity_token
   before_action :set_headers
+
   def show
     set_variables
-    set_caching_headers
 
     # HTTP 캐싱 적용
     fresh_when(
@@ -29,7 +29,7 @@ class SitemapsController < ApplicationController
     @phone_numbers = PhoneNumber
       .select(:number, :updated_at)
       .order(updated_at: :desc)
-      .includes(:comments) # N+1 쿼리 방지
+      .includes(:comments)
 
     @last_modified = [
       @phone_numbers.first&.updated_at,
