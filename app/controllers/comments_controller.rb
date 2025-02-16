@@ -61,7 +61,15 @@ class CommentsController < ApplicationController
   private
 
   def set_phone_number
-    @phone_number = PhoneNumber.find_by!(number: params[:phone_number_number])
+    number = params[:phone_number_number].to_s.gsub(/[^0-9]/, "")
+    country_code = "82" # 한국 국가 코드
+    country = "kr"
+
+    @phone_number = PhoneNumber.find_or_create_by!(
+      country_code: country_code,
+      country: country,
+      number: number
+    )
   end
 
   def set_comment
