@@ -9,13 +9,23 @@ class HomeController < ApplicationController
     country_code = "82" # 한국 국가 코드
     country = "kr"
 
-    @phone_number = PhoneNumber.find_or_create_by(
+    @phone_number = PhoneNumber.find_by(
       country_code: country_code,
       country: country,
       number: number
     )
 
+    if @phone_number
+      @comments = @phone_number.comments.includes(:user).order(created_at: :desc).page(params[:page])
+    else
+      @phone_number = PhoneNumber.new(
+        country_code: country_code,
+        country: country,
+        number: number
+      )
+      @comments = Comment.none.page(params[:page])
+    end
+
     @comment = Comment.new(phone_number: @phone_number)
-    @comments = @phone_number.comments.includes(:user).order(created_at: :desc).page(params[:page])
   end
 end

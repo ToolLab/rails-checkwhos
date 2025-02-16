@@ -5,12 +5,12 @@ Rails.application.routes.draw do
   scope "(:locale)", locale: /kr/ do
     root "home#index"
     get "search/:number", to: "home#search", as: :search
-    
+
     resources :phone_numbers, param: :number, only: [] do
-      resources :comments, only: [:create]
+      resources :comments, only: [ :create ]
     end
 
-    resources :comments, only: [:destroy], param: :id do
+    resources :comments, only: [ :destroy ], param: :id do
       member do
         post "like"
         post "dislike"
