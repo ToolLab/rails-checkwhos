@@ -1,4 +1,32 @@
 ko:
+  devise:
+    passwords:
+      new:
+        forgot_your_password: "비밀번호 찾기"
+        send_me_reset_password_instructions: "비밀번호 재설정 메일 받기"
+      edit:
+        change_my_password: "비밀번호 변경"
+        change_your_password: "비밀번호 변경"
+        new_password: "새 비밀번호"
+    sessions:
+      new:
+        sign_in: "로그인"
+        remember_me: "로그인 상태 유지"
+    registrations:
+      new:
+        sign_up: "회원가입"
+    shared:
+      minimum_password_length: "비밀번호는 최소 %{count}자 이상이어야 합니다"
+      links:
+        sign_in: "로그인"
+        sign_up: "회원가입"
+        forgot_your_password: "비밀번호를 잊으셨나요?"
+    failure:
+      already_authenticated: "이미 로그인하셨습니다."
+      invalid: "이메일 또는 비밀번호가 올바르지 않습니다."
+      not_found_in_database: "이메일 또는 비밀번호가 올바르지 않습니다."
+      timeout: "세션이 만료되었습니다. 계속하려면 다시 로그인해주세요."
+      unauthenticated: "계속하려면 로그인하거나 회원가입해주세요."
   activerecord:
     errors:
       messages:
