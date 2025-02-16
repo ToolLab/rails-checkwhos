@@ -1,8 +1,26 @@
-<div class="min-h-screen flex flex-col items-center pt-16 sm:pt-24">
+<% content_for :title do %>체크후즈 - 스팸번호 검색 및 신고<% end %>
+<% content_for :meta_description do %>스팸, 보이스피싱, 스미싱 전화번호를 검색하고 신고하세요. 다른 사용자들의 경험을 공유하고 피해를 예방하세요.<% end %>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "체크후즈",
+  "url": "<%= request.base_url %>",
+  "description": "스팸, 보이스피싱, 스미싱 전화번호 검색 및 신고 서비스",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "<%= request.base_url %>/kr/search/{search_term}",
+    "query-input": "required name=search_term"
+  }
+}
+</script>
+
+<main class="min-h-screen flex flex-col items-center pt-16 sm:pt-24" itemscope itemtype="https://schema.org/WebSite">
   <div class="w-full max-w-xl mx-auto px-4">
     <div class="text-center mb-8">
-      <h1 class="text-4xl font-bold text-gray-900 mb-2">체크후즈</h1>
-      <p class="text-gray-600">스팸 번호를 검색하고 공유하세요</p>
+      <h1 class="text-4xl font-bold text-gray-900 mb-2" itemprop="name">체크후즈</h1>
+      <p class="text-gray-600" itemprop="description">스팸, 보이스피싱, 스미싱 전화번호를 검색하고 신고하세요</p>
     </div>
     
     <%= form_tag search_path(number: ""), method: :get, class: "w-full", id: "search-form" do %>
@@ -38,7 +56,7 @@
 
     <div class="mt-12">
       <div class="mb-8">
-        <h3 class="text-lg font-semibold text-gray-900 mb-4">최근 등록된 번호</h3>
+        <h2 class="text-lg font-semibold text-gray-900 mb-4">최근 등록된 번호</h2>
         <div class="bg-white shadow rounded-lg divide-y divide-gray-200">
           <% @recent_numbers.each do |number| %>
             <%= link_to search_path(number: number.number), class: "block hover:bg-gray-50" do %>

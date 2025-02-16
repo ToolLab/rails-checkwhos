@@ -5,27 +5,33 @@ class HomeController < ApplicationController
   end
 
   def search
-    number = params[:number].gsub(/[^0-9]/, "")
-    country_code = "82" # 한국 국가 코드
-    country = "kr"
+    if params[:number].present?
+      number = params[:number].gsub(/[^0-9]/, "")
+      country_code = "82" # 한국 국가 코드
+      country = "kr"
 
-    @phone_number = PhoneNumber.find_by(
-      country_code: country_code,
-      country: country,
-      number: number
-    )
-
-    if @phone_number
-      @comments = @phone_number.comments.includes(:user).order(created_at: :desc).page(params[:page])
-    else
-      @phone_number = PhoneNumber.new(
+      @phone_number = PhoneNumber.find_by(
         country_code: country_code,
         country: country,
         number: number
       )
-      @comments = Comment.none.page(params[:page])
-    end
 
-    @comment = Comment.new(phone_number: @phone_number)
+      if @phone_number
+        @comments = @phone_number.comments.includes(:user).order(created_at: :desc).page(params[:page])
+        @comment = Comment.new(phone_number: @phone_number)
+      else
+        @phone_number = PhoneNumber.new(
+          country_code: country_code,
+          country: country,
+          number: number
+        )
+        @comments = Comment.none.page(params[:page])
+        @comment = Comment.new(phone_number: @phone_number)
+      end
+    else
+      @phone_number = nil
+      @comments = Comment.none.page(params[:page])
+      @comment = nil
+    end
   end
 end
