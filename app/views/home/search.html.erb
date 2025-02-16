@@ -1,18 +1,6 @@
-<% content_for :title do %>
-  <% if @phone_number.present? %>
-    <%= @phone_number.seo_number %> / <%= @phone_number.formatted_number %> - 전화번호 신고 및 댓글
-  <% else %>
-    전화번호를 찾을 수 없습니다 - 체크후즈
-  <% end %>
-<% end %>
+<% content_for :title do %><% if @phone_number.present? %><%= @phone_number.seo_number %> / <%= @phone_number.formatted_number %> - 전화번호 신고 및 댓글<% else %>전화번호를 찾을 수 없습니다 - 체크후즈<% end %><% end %>
 
-<% content_for :meta_description do %>
-  <% if @phone_number.present? %>
-    <%= @phone_number.seo_number %> 번호에 대한 스팸, 보이스피싱, 스미싱 신고 및 댓글 정보. 다른 사용자들의 경험을 통해 피해를 예방하세요.
-  <% else %>
-    입력하신 전화번호를 찾을 수 없습니다. 다른 번호를 검색해보세요.
-  <% end %>
-<% end %>
+<% content_for :meta_description do %><% if @phone_number.present? %><%= @phone_number.seo_number %> / <%= @phone_number.formatted_number %> 번호에 대한 스팸, 보이스피싱, 스미싱 신고 및 댓글 정보. 다른 사용자들의 경험을 통해 피해를 예방하세요.<% else %>입력하신 전화번호를 찾을 수 없습니다. 다른 번호를 검색해보세요.<% end %><% end %>
 
 <% if @phone_number.present? %>
 <script type="application/ld+json">
