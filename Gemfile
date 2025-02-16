@@ -66,3 +66,5 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem "tailwindcss-ruby", "~> 4.0"
 
 gem "tailwindcss-rails", "~> 4.0"
+
+gem "devise", "~> 4.9"
