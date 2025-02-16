@@ -23,8 +23,59 @@
             <div class="mt-8 flex justify-center">
               <script src="https://ads-partners.coupang.com/g.js"></script>
               <script>
-                  new PartnersCoupang.G({"id":733737,"trackingCode":"AF8699641","subId":null,"template":"carousel","width":"320","height":"100"});
+                  new PartnersCoupang.G({"id":733737,"trackingCode":"AF8699641","subId":null,"template":"banner","width":"320","height":"100"});
               </script>
+            </div>
+
+            <div class="mt-12">
+              <div class="mb-8">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">최근 등록된 번호</h3>
+                <div class="bg-white shadow rounded-lg divide-y divide-gray-200">
+                  <% @recent_numbers.each do |number| %>
+                    <%= link_to search_path(number: number.number), class: "block hover:bg-gray-50" do %>
+                      <div class="px-4 py-4 sm:px-6">
+                        <div class="flex items-center justify-between">
+                          <p class="text-sm font-medium text-blue-600 truncate">
+                            <%= number.formatted_number %>
+                          </p>
+                          <div class="ml-2 flex-shrink-0 flex">
+                            <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                              <%= time_ago_in_words(number.created_at) %> 전
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+
+              <div class="mb-8">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">최근 등록된 코멘트</h3>
+                <div class="bg-white shadow rounded-lg divide-y divide-gray-200">
+                  <% @recent_comments.each do |comment| %>
+                    <%= link_to search_path(number: comment.phone_number.number), class: "block hover:bg-gray-50" do %>
+                      <div class="px-4 py-4 sm:px-6">
+                        <div class="flex items-center justify-between">
+                          <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-blue-600 truncate">
+                              <%= comment.phone_number.formatted_number %>
+                            </p>
+                            <p class="text-sm text-gray-500 truncate">
+                              <%= comment.content %>
+                            </p>
+                          </div>
+                          <div class="ml-2 flex-shrink-0 flex">
+                            <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                              <%= time_ago_in_words(comment.created_at) %> 전
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
             </div>
           </div>
         </div>

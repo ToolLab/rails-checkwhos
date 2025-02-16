@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
   def index
+    @recent_numbers = PhoneNumber.order(created_at: :desc).limit(100)
+    @recent_comments = Comment.includes(:user, :phone_number).order(created_at: :desc).limit(100)
   end
 
   def search
