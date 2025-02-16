@@ -7,7 +7,7 @@ image: toollab/rails-checkwhos
 # Deploy to these servers.
 servers:
   web:
-    - 192.168.0.1
+    - 158.247.241.85
   # job:
   #   hosts:
   #     - 192.168.0.1
