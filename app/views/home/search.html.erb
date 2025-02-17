@@ -15,6 +15,16 @@
     "@type": "WebPage",
     "@id": "<%= request.original_url %>"
   },
+  "publisher": {
+    "@type": "Organization",
+    "name": "체크후즈",
+    "url": "https://checkwhos.com"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "<%= @phone_number.formatted_number %>",
+    "description": "스팸, 보이스피싱, 스미싱 전화번호 신고 및 댓글 정보"
+  },
   "commentCount": <%= @comments.total_count %>,
   "comments": [
     <% @comments.each_with_index do |comment, index| %>

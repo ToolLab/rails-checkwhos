@@ -1,6 +1,9 @@
-# Allow all search engines to index the site
+# Search engine crawling rules
 User-agent: *
-Allow: /
+Disallow: /search
+Disallow: /users
+Allow: /kr/
+Allow: /sitemap.xml
 
 # Sitemap location
 Sitemap: https://checkwhos.com/sitemap.xml
