@@ -1,4 +1,5 @@
 class PhoneNumber < ApplicationRecord
+  has_many :page_views, dependent: :destroy
   has_many :comments, dependent: :destroy
 
   validates :country_code, presence: true

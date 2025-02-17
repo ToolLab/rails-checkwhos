@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_16_105443) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_17_042955) do
   create_schema "auth"
   create_schema "extensions"
   create_schema "graphql"
@@ -42,6 +42,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_16_105443) do
     t.datetime "updated_at", null: false
     t.index ["phone_number_id"], name: "index_comments_on_phone_number_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "page_views", force: :cascade do |t|
+    t.bigint "phone_number_id", null: false
+    t.string "ip", null: false
+    t.string "referrer"
+    t.datetime "viewed_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ip", "viewed_at"], name: "index_page_views_on_ip_and_viewed_at"
+    t.index ["phone_number_id", "viewed_at"], name: "index_page_views_on_phone_number_id_and_viewed_at"
+    t.index ["phone_number_id"], name: "index_page_views_on_phone_number_id"
+    t.index ["viewed_at"], name: "index_page_views_on_viewed_at"
   end
 
   create_table "phone_numbers", force: :cascade do |t|
@@ -77,6 +90,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_16_105443) do
 
   add_foreign_key "comments", "phone_numbers"
   add_foreign_key "comments", "users"
+  add_foreign_key "page_views", "phone_numbers"
   add_foreign_key "votes", "comments"
   add_foreign_key "votes", "users"
 end

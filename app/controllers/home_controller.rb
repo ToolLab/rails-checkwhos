@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  after_action :record_page_view, only: [ :search ]
+
   def index
     @recent_numbers = PhoneNumber.order(created_at: :desc).limit(100)
     @recent_comments = Comment.includes(:user, :phone_number).order(created_at: :desc).limit(100)
@@ -33,5 +35,17 @@ class HomeController < ApplicationController
       @comments = Comment.none.page(params[:page])
       @comment = nil
     end
+  end
+
+  private
+
+  def record_page_view
+    return unless @phone_number&.persisted?
+
+    @phone_number.page_views.create!(
+      ip: request.remote_ip,
+      referrer: request.referrer,
+      viewed_at: Time.current
+    )
   end
 end
