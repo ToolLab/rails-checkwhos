@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <title><%= strip_tags(content_for(:title)).strip || "체크후즈 - 스팸번호 검색 및 신고" %></title>
+    <title><%= content_for(:title).present? ? strip_tags(content_for(:title)).strip : "체크후즈 - 스팸번호 검색 및 신고" %></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="<%= strip_tags(content_for(:meta_description)).strip || '스팸, 보이스피싱, 스미싱 전화번호를 검색하고 신고하세요. 다른 사용자들의 경험을 공유하고 피해를 예방하세요.' %>">
+    <meta name="description" content="<%= content_for(:meta_description).present? ? strip_tags(content_for(:meta_description)).strip : '스팸, 보이스피싱, 스미싱 전화번호를 검색하고 신고하세요. 다른 사용자들의 경험을 공유하고 피해를 예방하세요.' %>">
     <meta name="keywords" content="스팸, 보이스피싱, 스미싱, 전화번호 검색, 스팸번호, 악성전화, 보이스피싱 신고">
     <meta name="author" content="체크후즈">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="<%= strip_tags(content_for(:og_title) || content_for(:title)).strip || '체크후즈 - 스팸번호 검색 및 신고' %>">
-    <meta property="og:description" content="<%= strip_tags(content_for(:meta_description)).strip || '스팸, 보이스피싱, 스미싱 전화번호를 검색하고 신고하세요. 다른 사용자들의 경험을 공유하고 피해를 예방하세요.' %>">
+    <meta property="og:title" content="<%= (content_for(:og_title).present? || content_for(:title).present?) ? strip_tags(content_for(:og_title) || content_for(:title)).strip : '체크후즈 - 스팸번호 검색 및 신고' %>">
+    <meta property="og:description" content="<%= content_for(:meta_description).present? ? strip_tags(content_for(:meta_description)).strip : '스팸, 보이스피싱, 스미싱 전화번호를 검색하고 신고하세요. 다른 사용자들의 경험을 공유하고 피해를 예방하세요.' %>">
     <meta property="og:type" content="website">
     <meta property="og:url" content="<%= request.original_url %>">
     <meta property="og:site_name" content="체크후즈">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="<%= strip_tags(content_for(:twitter_title) || content_for(:title)).strip || '체크후즈 - 스팸번호 검색 및 신고' %>">
-    <meta name="twitter:description" content="<%= strip_tags(content_for(:meta_description)).strip || '스팸, 보이스피싱, 스미싱 전화번호를 검색하고 신고하세요. 다른 사용자들의 경험을 공유하고 피해를 예방하세요.' %>">
+    <meta name="twitter:title" content="<%= (content_for(:twitter_title).present? || content_for(:title).present?) ? strip_tags(content_for(:twitter_title) || content_for(:title)).strip : '체크후즈 - 스팸번호 검색 및 신고' %>">
+    <meta name="twitter:description" content="<%= content_for(:meta_description).present? ? strip_tags(content_for(:meta_description)).strip : '스팸, 보이스피싱, 스미싱 전화번호를 검색하고 신고하세요. 다른 사용자들의 경험을 공유하고 피해를 예방하세요.' %>">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="canonical" href="<%= request.original_url %>">
