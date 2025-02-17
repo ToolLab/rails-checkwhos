@@ -40,7 +40,11 @@ class HomeController < ApplicationController
   private
 
   def get_visitor_ip
-    # X-Forwarded-For 헤더가 있으면 첫 번째 IP를 사용
+    # Cloudflare의 CF-Connecting-IP 헤더 확인
+    cf_ip = request.headers["CF-Connecting-IP"]
+    return cf_ip if cf_ip.present?
+
+    # X-Forwarded-For 헤더 확인
     forwarded_for = request.headers["X-Forwarded-For"]
     if forwarded_for.present?
       forwarded_for.split(",").first.strip
