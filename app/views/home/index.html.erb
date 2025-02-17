@@ -59,7 +59,7 @@
         <h2 class="text-lg font-semibold text-gray-900 mb-4">최근 등록된 번호</h2>
         <div class="bg-white shadow rounded-lg divide-y divide-gray-200">
           <% @recent_numbers.each do |number| %>
-            <%= link_to search_path(number: number.number), class: "block hover:bg-gray-50" do %>
+            <%= link_to search_path(number: number.number), class: "block hover:bg-gray-50", data: { turbo_prefetch: false } do %>
               <div class="px-4 py-4 sm:px-6">
                 <div class="flex items-center justify-between">
                   <p class="text-sm font-medium text-blue-600 truncate">
@@ -81,7 +81,7 @@
         <h3 class="text-lg font-semibold text-gray-900 mb-4">최근 등록된 코멘트</h3>
         <div class="bg-white shadow rounded-lg divide-y divide-gray-200">
           <% @recent_comments.each do |comment| %>
-            <%= link_to search_path(number: comment.phone_number.number), class: "block hover:bg-gray-50" do %>
+            <%= link_to search_path(number: comment.phone_number.number), class: "block hover:bg-gray-50", data: { turbo_prefetch: false } do %>
               <div class="px-4 py-4 sm:px-6">
                 <div class="flex items-center justify-between">
                   <div class="flex-1 min-w-0">
