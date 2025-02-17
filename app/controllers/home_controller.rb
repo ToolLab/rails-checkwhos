@@ -68,6 +68,7 @@ class HomeController < ApplicationController
     @phone_number.page_views.create!(
       ip: get_visitor_ip,
       referrer: request.referrer,
+      user_agent: request.user_agent,
       viewed_at: current_time
     )
 
